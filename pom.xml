@@ -14,6 +14,10 @@
         <version>1.5.10.RELEASE</version>
     </parent>
 
+    <properties>
+        <tomcat.version>8.0.42</tomcat.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

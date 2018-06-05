@@ -12,10 +12,18 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/web")
 public class HelloController {
 
-    @RequestMapping("/websocket")
+    @RequestMapping("/client")
     public ModelAndView toHelloHtml(){
         ModelAndView modelAndView = new ModelAndView();
-        System.out.println("websocket");
+        System.out.println("client request");
+        modelAndView.setViewName("client");
+        return modelAndView;
+    }
+
+    @RequestMapping("/index")
+    public ModelAndView toIndex(){
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println("client request");
         modelAndView.setViewName("index");
         return modelAndView;
     }

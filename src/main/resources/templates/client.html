@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>客户端</title>
+</head>
+<body>
+    Welcome<br/><input id="text" type="text"/>
+    <button onclick="send()">发送消息</button>
+    <hr/>
+    <button onclick="closeWebSocket()">关闭websocket连接</button>
+    <hr/>
+    <div id="message">
+
+    </div>
+</body>
+    <script type="text/javascript">
+        var webSocekt = null;
+        if('WebSocket' in window){
+            webSocekt = new WebSocket("ws://localhost:8080/websocket");
+        }else{
+            alert('当前浏览器不支持 websocket');
+        }
+
+        //将消息显示在网页上
+        function setMessageInnerHTML(innerHTML) {
+            document.getElementById("message").innerHTML += innerHTML + '<br/>';
+        }
+
+        //连接发生错误的回调方法
+        webSocekt.onerror = function () {
+            setMessageInnerHTML('websocket 连接发生错误');
+        };
+
+        //连接成功建立的回调方法
+        webSocekt.onopen = function () {
+            setMessageInnerHTML('websocket 连接成功');
+        };
+
+        //接收到消息的回调方法
+        webSocekt.onmessage = function (event) {
+            setMessageInnerHTML(event.data);
+        };
+
+        //关闭连接的回调方法
+        webSocekt.onclose = function () {
+            setMessageInnerHTML('websocket 连接关闭');
+        };
+
+        //监听窗口关闭事件
+        window.onbeforeunload = function () {
+            closeWebSocket();
+        };
+
+        //关闭websocket连接
+        function closeWebSocket() {
+            webSocekt.close();
+        }
+
+        //发送消息
+        function send(){
+            var message = document.getElementById('text').value;
+            webSocekt.send(message);
+        }
+
+
+
+    </script>
+
+</html>
