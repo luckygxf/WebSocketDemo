@@ -19,6 +19,7 @@ public class WebSocketTest {
 
     @OnOpen
     public void onOpen(Session session){
+        System.out.println("onOpen " + session + ", " + session.getProtocolVersion());
         this.session = session;
         webSocketSet.add(this);
 
@@ -26,6 +27,7 @@ public class WebSocketTest {
 
     @OnClose
     public void onClose(){
+        System.out.println("onClose");
         webSocketSet.remove(this);
     }
 
@@ -54,6 +56,7 @@ public class WebSocketTest {
      * 发送消息
      * */
     public void sendMessage(String message) throws IOException{
+        System.out.println("sendMessage : " + message);
         this.session.getBasicRemote().sendText(message);
     }
 

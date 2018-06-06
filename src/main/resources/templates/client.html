@@ -18,6 +18,7 @@
         var webSocekt = null;
         if('WebSocket' in window){
             webSocekt = new WebSocket("ws://localhost:8080/websocket");
+            console.log("webSocket: " + webSocekt );
         }else{
             alert('当前浏览器不支持 websocket');
         }
